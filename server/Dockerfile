@@ -17,7 +17,7 @@ LABEL Author "Kyle Derby MacInnis"
 ENV API_HOST=${API_HOST}
 ENV API_VERSION=${API_VERSION}
 ENV API_ROUTE_PATH=${API_ROUTE_PATH}
-ENV APP_PORT=${PORT}
+ENV API_PORT=${PORT}
 ENV DB_USER=${DB_USER}
 ENV DB_PASS=${DB_PASS}
 ENV DB_HOST=${DB_HOST}
@@ -34,13 +34,13 @@ WORKDIR /opt/nerd
 COPY . .
 # Yarn & NodeJS
 RUN apt-get update -y && apt-get install -y curl nodejs git gnupg dos2unix
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+# RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update -y && apt-get install -y yarn
 # Build Source
 RUN yarn && yarn build
 # Expose Ports
-EXPOSE 8081
+EXPOSE 8080
 # Start when Container Opens
 CMD [ "yarn", "start" ]
 

@@ -23,7 +23,7 @@ var location : Location;
 class ApiHelper {
 
     static host: string = process.env.API_HOST || "http://localhost"
-    static port: number = parseInt(process.env.APP_PORT || "8081")
+    static port: number = parseInt(process.env.API_PORT || "8080")
     static ver: string = process.env.API_VERSION || "v1"
 
     static get = async (path: string, queryObj: any = {}) => {
