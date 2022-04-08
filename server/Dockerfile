@@ -11,7 +11,7 @@
 # ** ------------------------------------------ **
 # \*                                            */
 
-FROM ubuntu
+FROM --platform=linux/x86_64 node
 LABEL Author "Kyle Derby MacInnis"
 # Env Variables
 ENV API_HOST=${API_HOST}
@@ -27,16 +27,17 @@ ENV PUBLIC_URL=${PUBLIC_URL}
 ENV ENABLE_AUTH=${ENABLE_AUTH}
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/Edmonton
+ENV NODE_OPTIONS=--openssl-legacy-provider
 # Copy Content
 WORKDIR /opt
 RUN mkdir nerd
 WORKDIR /opt/nerd
 COPY . .
 # Yarn & NodeJS
-RUN apt-get update -y && apt-get install -y curl nodejs git gnupg dos2unix
-# RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-# RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update -y && apt-get install -y yarn
+# RUN apt-get update -y && apt-get install -y curl nodejs git gnupg dos2unix
+# # RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+# # RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+# RUN apt-get update -y && apt-get install -y yarn
 # Build Source
 RUN yarn && yarn build
 # Expose Ports

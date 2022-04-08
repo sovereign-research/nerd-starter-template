@@ -11,7 +11,7 @@
 # ** ------------------------------------------ **
 # \*                                            */
 
-FROM mysql:8.0
+FROM --platform=linux/x86_64 mysql:8.0
 # Env Variables
 ENV MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
 ENV MYSQL_USER=${DB_USER}
